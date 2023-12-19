@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <style>
+      h1 {
+        text-align: center;
+      }
+      h2 {
+        text-align: center;
+      }
+      form {
+        margin: auto;
+        width: 50%;
+        padding: 50px;
+        text-align: center;
+      }
+      img {
+        display: block;
+        margin: auto;
+        width: 50%;
+        height: 400px;
+      }
+      
+      body{
+        background-image:('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCBfseo0Au7N8uXUKUgLTcuVSEBdaB2k6KJg&usqp=CAU');
+      }
+
+      #selected-files {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .file-container {
+        width: 50%;
+        height: 400px;
+        margin: 10px;
+      }
+      video {
+        width: 100%;
+        height: 100%;
+      }
+
+    </style>
+   
+    <script>
+      function handleFileInput() {
+        var input = document.createElement("input");
+        input.setAttribute("type", "file");
+        input.setAttribute("accept", "image/*, video/*");
+        input.click();
+      }
+    </script>
+
+    <title>Automatic Number Plate Recognition</title>
+  </head>
+  <body>
+    <h1>Automatic Number Plate Recognition</h1>
+
+    <video width="320" height="240" controls>
+      <source src="./../static/uploads/output.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <img src="https://www.innominds.com/hs-fs/hubfs/Innominds-201612/img/IM%20Inner%20Pages/ANPR/what-is-anpr.png?width=693&name=what-is-anpr.png" alt="logo">
+    <h2>Upload image/video:</h2>
+  
+
+    <form id="file-form" enctype="multipart/form-data">
+      <input type="file" id="file-input" accept="image/*,video/*">
+      <button type="submit" id="upload-button">Upload</button>
+      <div id="preview"></div>
+   
+    <script>
+      const fileInput = document.getElementById("file-input");
+      const uploadButton = document.getElementById("upload-button");
+      const preview = document.getElementById("preview");
+  
+      uploadButton.addEventListener("click", function() {
+        const file = fileInput.files[0];
+        const fileType = file.type.split("/")[0];
+        
+        if (fileType === "image") {
+          const img = document.createElement("img");
+          img.src = URL.createObjectURL(file);
+          preview.innerHTML = "";
+          preview.appendChild(img);
+        } else if (fileType === "video") {
+          const video = document.createElement("video");
+          video.src = URL.createObjectURL(file);
+          video.controls = true;
+          preview.innerHTML = "";
+          preview.appendChild(video);
+        }
+      });
+    </script>
+
+  </body>
+</html>
